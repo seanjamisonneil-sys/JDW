@@ -59,7 +59,7 @@
     .hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 64px);
+      min-height: calc(86vh - 64px);
       max-width: 1280px;
       margin: 0 auto;
       padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
@@ -114,10 +114,58 @@
     .btn-ghost:hover { border-color: var(--ink); }
 
     .hero-visual {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 1rem;
+      position: relative;
+      min-width: 0;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: -14px 18px 18px -14px;
+      border: 1px solid rgba(196, 93, 43, 0.35);
+      border-radius: 12px;
+      z-index: -1;
+    }
+    .hero-stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      box-shadow: 0 24px 60px rgba(31, 30, 26, 0.14);
+    }
+    .hero-stage img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+    .hero-stage figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 3.25rem 1rem 1rem;
+      background: linear-gradient(transparent, rgba(31, 30, 26, 0.72));
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .hero-stage figcaption span {
+      padding: 0.55rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      background: rgba(31, 30, 26, 0.88);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    }
+    .hero-stage figcaption span:last-child {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
     }
     .card-feat {
       background: var(--surface);
@@ -170,28 +218,61 @@
     .services h2 {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 3rem; max-width: 500px;
+      margin-bottom: 0.75rem; max-width: 500px;
       line-height: 1.2;
+    }
+    .services-intro {
+      max-width: 620px;
+      margin-bottom: 3rem;
+      color: #aaa69d;
+      font-size: 1rem;
+      line-height: 1.7;
     }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.5px;
       border: 1.5px solid #2e2c28;
       border-radius: 8px;
       overflow: hidden;
     }
     .service-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 310px;
       background: #222018;
       padding: 2.5rem 2rem;
       border: 1.5px solid #2e2c28;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .service-item:hover { background: #2a2820; }
+    .service-item:hover {
+      z-index: 1;
+      background: #2a2820;
+      transform: translateY(-3px);
+      box-shadow: inset 0 3px 0 var(--accent), 0 16px 30px rgba(0, 0, 0, 0.2);
+    }
+    .service-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
     .service-item .num {
       font-size: 0.75rem; font-weight: 600;
       color: var(--accent); letter-spacing: 0.1em;
-      margin-bottom: 1rem; display: block;
+      display: block;
+    }
+    .service-icon {
+      width: 38px;
+      height: 38px;
+      color: #d4d0c7;
+      stroke-width: 1.5;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .service-item:hover .service-icon {
+      color: var(--accent);
+      transform: translateY(-2px);
     }
     .service-item h3 {
       font-family: 'DM Serif Display', serif;
@@ -199,6 +280,20 @@
       color: #f5f3ef;
     }
     .service-item p { font-size: 0.875rem; color: #9c9890; line-height: 1.7; }
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      width: fit-content;
+      margin-top: auto;
+      padding-top: 1.5rem;
+      color: #d8d4cc;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+    .service-link:hover { color: var(--accent); gap: 0.65rem; }
 
     /* ── RFQ FORM ── */
     .rfq {
@@ -209,7 +304,7 @@
       gap: 5rem;
       align-items: start;
     }
-    .rfq-info {}
+    .rfq-info { position: sticky; top: 6rem; }
     .rfq-info h2 {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(2rem, 3.5vw, 2.75rem);
@@ -229,12 +324,51 @@
     }
     .step-text strong { display: block; font-weight: 600; margin-bottom: 0.2rem; }
     .step-text span { font-size: 0.875rem; color: var(--ink-muted); }
+    .response-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 2rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
 
     form {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 2.5rem;
+    }
+    .form-section + .form-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .form-section-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--ink);
+    }
+    .form-section-heading span {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
     }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .form-group { margin-bottom: 1.25rem; }
@@ -267,21 +401,7 @@
     }
     textarea { resize: vertical; min-height: 120px; }
 
-    .file-upload {
-      border: 2px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      background: var(--bg);
-    }
-    .file-upload:hover { border-color: var(--accent); background: var(--accent-light); }
-    .file-upload input { display: none; }
-    .file-upload .upload-icon { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
-    .file-upload p { font-size: 0.875rem; color: var(--ink-muted); }
-    .file-upload strong { color: var(--accent); }
-    #file-name { font-size: 0.8rem; color: var(--accent); margin-top: 0.5rem; display: none; }
+    .field-help { margin-top: 0.45rem; font-size: 0.75rem; color: var(--ink-muted); }
 
     .form-divider {
       border: none; border-top: 1px solid var(--border);
@@ -303,6 +423,7 @@
     }
     .btn-submit:hover { background: #b0531f; transform: translateY(-1px); }
     .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { cursor: wait; opacity: 0.7; transform: none; }
 
     /* ── SUCCESS MESSAGE ── */
     .success-msg {
@@ -317,6 +438,20 @@
     .success-msg .checkmark { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
     .success-msg strong { display: block; font-size: 1.1rem; margin-bottom: 0.25rem; }
     .success-msg span { font-size: 0.875rem; color: #4a7a57; }
+    .form-status {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .form-status.error {
+      display: block;
+      color: #8a3328;
+      background: #fbeeea;
+      border: 1px solid #e1a99c;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -337,10 +472,14 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 3rem; }
-      .hero-visual { display: none; }
+      .hero-visual { width: min(100%, 680px); margin: 0 auto; }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rfq-info { position: static; }
       .rfq { grid-template-columns: 1fr; gap: 2.5rem; }
     }
     @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .service-item { min-height: 280px; }
       .form-row { grid-template-columns: 1fr; }
       nav ul { display: none; }
       .submit-row { flex-direction: column; align-items: stretch; }
@@ -380,69 +519,80 @@
   <div class="hero-text">
     <!-- <div class="eyebrow">Contract CAD & 3D Printing</div>-->
     <h1>You dream it,<br><em>we create it.</em></h1>
-    <p class="hero-sub">Custom 3D modeling and professional protoyping services — from concept to finished part. Fast turnaround, competitive pricing, and direct designer communication.</p>
+    <p class="hero-sub">Custom 3D modeling and professional prototyping services — from concept to finished part. Fast turnaround, competitive pricing, and direct designer communication.</p>
     <div>
       <a href="#rfq" class="btn btn-primary">Request a Quote →</a>
       <a href="#services" class="btn btn-ghost">Our Services</a>
     </div>
   </div>
 
-  <!--<div class="hero-visual">
-  <div class="card-feat">
-        <span class="icon">📐</span>
-      x<h3>CAD Design</h3>
-      <p>Parametric modeling for mechanical parts, enclosures, and custom assemblies.</p>
-    </div>
-    <div class="card-feat">
-      <span class="icon">🖨️</span>
-      <h3>3D Printing</h3>
-      <p>FDM printing with a range of materials and finishes available.</p>
-    </div>
-    <div class="card-feat wide">
-      <div class="stat-row">
-        <div class="stat"><strong>48hr</strong><span>Typical quote turnaround</span></div>
-        <div class="stat"><strong>Quality</strong><span>Guaranteed</span></div>
-        <div class="stat"><strong>100%</strong><span>Custom work</span></div>
-      </div>
-    </div>
-  </div>-->
+  <div class="hero-visual">
+    <figure class="hero-stage">
+      <img src="assets/cad-to-reality-hero.png" alt="Cup holder design transitioning from a CAD model to the finished 3D-printed product" />
+      <figcaption><span>CAD model</span><span>Finished product</span></figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-inner">
-    <!--<div class="section-label">What we offer</div>-->
     <h2>What we offer</h2>
+    <p class="services-intro">From first sketch to finished part, choose the support your project needs.</p>
     <div class="services-grid">
       <div class="service-item">
-        <span class="num">01</span>
+        <div class="service-item-top">
+          <span class="num">01</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="m24 4 17 10v20L24 44 7 34V14L24 4Z"/><path d="m7 14 17 10 17-10M24 24v20"/></svg>
+        </div>
         <h3>Custom 3D Modeling</h3>
-        <p>Fully parametric 3D models built to your specifications.</p>
+        <p>Parametric 3D models built around your specifications and intended use.</p>
+        <a class="service-link" href="#rfq" data-service="Custom 3D Modeling">Request this service <span>→</span></a>
       </div>
       <div class="service-item">
-        <span class="num">02</span>
+        <div class="service-item-top">
+          <span class="num">02</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 18h24l5 7v13H7V25l5-7Z"/><path d="M15 18V8h18v10M14 31h20M18 38v6h12v-6M14 26h4"/></svg>
+        </div>
         <h3>3D Printing</h3>
-        <p>Fused deposition modeling in PLA, PETG, ABS, and more. Great for functional prototypes, jigs, fixtures, and low-run production.</p>
+        <p>Functional FDM parts in PLA, PETG, ABS, and more for prototypes or low-run production.</p>
+        <a class="service-link" href="#rfq" data-service="3D Printing">Request this service <span>→</span></a>
       </div>
       <div class="service-item">
-        <span class="num">03</span>
-        <h3>Prototype Developement</h3>
-        <p>We can take your idea from thought to a physical product</p>
+        <div class="service-item-top">
+          <span class="num">03</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="M9 35 27 17l8 8-18 18H9v-8Z"/><path d="m24 20 8 8M30 8l10 10M35 13l4-4M8 12h12M8 19h8"/></svg>
+        </div>
+        <h3>Prototype Development</h3>
+        <p>Turn an early idea or sketch into a practical, testable physical product.</p>
+        <a class="service-link" href="#rfq" data-service="Prototype Development">Request this service <span>→</span></a>
       </div>
       <div class="service-item">
-        <span class="num">04</span>
+        <div class="service-item-top">
+          <span class="num">04</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8 10h8v28H8M40 10h-8v28h8M16 17h16M16 31h16M21 13v8M27 27v8"/><path d="M4 10h16M28 10h16M4 38h16M28 38h16"/></svg>
+        </div>
         <h3>Reverse Engineering</h3>
-        <p>Have a part you need recreated, we can recreate your part as a usable 3D model</p>
+        <p>Have a part that needs recreating? We can rebuild it as an accurate, usable 3D model.</p>
+        <a class="service-link" href="#rfq" data-service="Reverse Engineering">Request this service <span>→</span></a>
       </div>
       <div class="service-item">
-        <span class="num">05</span>
+        <div class="service-item-top">
+          <span class="num">05</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="M11 5h18l8 8v30H11V5Z"/><path d="M29 5v9h8M17 24h14M17 30h14M17 36h9"/></svg>
+        </div>
         <h3>File Preparation</h3>
-        <p>STL cleanup, slicing optimization, and print-ready file delivery. Bring your existing files and I'll get them production-ready.</p>
+        <p>STL cleanup, slicing optimization, and print-ready delivery for your existing files.</p>
+        <a class="service-link" href="#rfq" data-service="File Preparation / Cleanup">Request this service <span>→</span></a>
       </div>
       <div class="service-item">
-       <span class="num">06</span>
+        <div class="service-item-top">
+          <span class="num">06</span>
+          <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" aria-hidden="true"><path d="m24 5 5 5 7-1 3 6 6 3-1 7 3 6-5 5-1 7-7 1-6 4-5-5-7 1-3-6-6-3 1-7-3-6 5-5 1-7 7-1 6-4Z"/><circle cx="24" cy="24" r="7"/></svg>
+        </div>
         <h3>Fabrication</h3>
-        <p>We work with trusted local manufacturing partners to produce CNC machined, laser-cut, and waterjet-cut components.</p>
+        <p>CNC-machined, laser-cut, and waterjet-cut components through trusted local partners.</p>
+        <a class="service-link" href="#rfq" data-service="Fabrication">Request this service <span>→</span></a>
       </div>
     </div>
   </div>
@@ -454,94 +604,95 @@
     <div class="rfq-info">
       <div class="section-label">Request a Quote</div>
       <h2>Tell us about your project</h2>
-      <p>Fill out the form and we will get back to you as soon as possible with pricing and timeline.</p>
+      <p>Share the details, drawings, or reference files you have. We will review everything and follow up with clear next steps.</p>
       <ul class="process-steps">
         <li>
           <div class="step-num">1</div>
           <div class="step-text">
             <strong>Submit your RFQ</strong>
-            <span>Fill in the project details and attach any reference files.</span>
+            <span>Fill in the project details and include a share link for any reference files.</span>
           </div>
         </li>
         <li>
           <div class="step-num">2</div>
           <div class="step-text">
-            <strong>Receive a quote</strong>
-            <span>We will review and send any questions we have followed by a quote.</span>
+            <strong>Review & quote</strong>
+            <span>We review the requirements, ask any questions, and send a detailed quote.</span>
           </div>
         </li>
         <li>
           <div class="step-num">3</div>
           <div class="step-text">
-            <strong>Approve & begin</strong>
-            <span>Once approved, we will start the project on the agreed upon timeline.</span>
-          </div>
-        </li>
-        <li>
-          <div class="step-num">4</div>
-          <div class="step-text">
-            <strong>Delivery</strong>
-            <span>Receive your files and/or finished parts, ready to use.</span>
+            <strong>Build & deliver</strong>
+            <span>Once approved, we complete the work on the agreed timeline and deliver it ready to use.</span>
           </div>
         </li>
       </ul>
+      <div class="response-time">● Typical response within one business day</div>
     </div>
 
-    <form id="rfq-form" 
-    action="https://formspree.io/f/xyklzdjz" 
-      method="POST">
-      <div class="form-row">
+    <form id="rfq-form" action="https://formsubmit.co/ajax/sean.jamison.neil@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New Jamison Design Works RFQ" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none" />
+
+      <div class="form-section">
+        <div class="form-section-heading"><span>01</span>Contact information</div>
+        <div class="form-row">
         <div class="form-group">
-          <label>First Name <span class="req">*</span></label>
-          <input type="text" name="first_name" placeholder="Jane" required />
+          <label for="first-name">First Name <span class="req">*</span></label>
+          <input type="text" id="first-name" name="first_name" placeholder="Jane" required />
         </div>
         <div class="form-group">
-          <label>Last Name <span class="req">*</span></label>
-          <input type="text" name="last_name" placeholder="Smith" required />
+          <label for="last-name">Last Name <span class="req">*</span></label>
+          <input type="text" id="last-name" name="last_name" placeholder="Smith" required />
+        </div>
+        </div>
+
+        <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company / Organization</label>
+          <input type="text" id="company" name="company" placeholder="Acme Corp (optional)" />
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-section">
+        <div class="form-section-heading"><span>02</span>Project details</div>
+        <div class="form-row">
         <div class="form-group">
-          <label>Email <span class="req">*</span></label>
-          <input type="email" name="email" placeholder="jane@company.com" required />
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" name="phone" placeholder="(555) 000-0000" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Company / Organization</label>
-        <input type="text" name="company" placeholder="Acme Corp (optional)" />
-      </div>
-
-      <hr class="form-divider" />
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Service Needed <span class="req">*</span></label>
-          <select name="service" required>
+          <label for="service-select">Service Needed <span class="req">*</span></label>
+          <select name="service" id="service-select" required>
             <option value="" disabled selected>Select a service…</option>
-            <option>Custom 3D modeling</option>
+            <option>Custom 3D Modeling</option>
             <option>3D Printing</option>
-            <option>Prototype Developement</option>
+            <option>Prototype Development</option>
+            <option>Reverse Engineering</option>
             <option>CAD Design + 3D Printing</option>
             <option>File Preparation / Cleanup</option>
+            <option>Fabrication</option>
             <option>Other / Not Sure</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Quantity</label>
-          <input type="number" name="quantity" placeholder="e.g. 1" min="1" />
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" placeholder="e.g. 1" min="1" />
         </div>
-      </div>
+        </div>
 
-      <div class="form-row">
+        <div class="form-row">
         <div class="form-group">
-          <label>Preferred Material</label>
-          <select name="material">
+          <label for="material">Preferred Material</label>
+          <select name="material" id="material">
             <option value="" disabled selected>Select if applicable…</option>
             <option>PLA</option>
             <option>PETG</option>
@@ -554,8 +705,8 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Target Timeline</label>
-          <select name="timeline">
+          <label for="timeline">Target Timeline</label>
+          <select name="timeline" id="timeline">
             <option value="" disabled selected>Select…</option>
             <option>ASAP / Rush</option>
             <option>1–2 weeks</option>
@@ -563,58 +714,56 @@
             <option>Flexible</option>
           </select>
         </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Project Description <span class="req">*</span></label>
+          <textarea id="description" name="description" placeholder="Describe your project in as much detail as possible — dimensions, functionality, end use, tolerances, etc." required></textarea>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Project Description <span class="req">*</span></label>
-        <textarea name="description" placeholder="Describe your project in as much detail as possible — dimensions, functionality, end use, tolerances, etc." required></textarea>
-      </div>
+      <div class="form-section">
+        <div class="form-section-heading"><span>03</span>Project files & budget</div>
 
-     <div class="form-group">
-        <label>Reference Files</label>
-        <label class="file-upload" for="file-input">
-          <span class="upload-icon">📎</span>
-          <p><strong>Click to upload</strong> or drag and drop</p>
-          <p>STL, STEP, DXF, PNG, PDF, etc. (max 25 MB)</p>
-          <div id="file-name"></div>
-          <input type="file" id="file-input" name="files" multiple
-            accept=".stl,.step,.stp,.dxf,.svg,.pdf,.png,.jpg,.jpeg,.zip" />
-        </label>
-      </div> 
-  <div class="form-group">
-        <label>Budget Range</label>
-        <input type="text" name="Budget" placeholder="$1000-$2000" />
-      </div>
+        <div class="form-group">
+          <label for="project-link">Project File Link</label>
+          <input type="url" id="project-link" name="project_link" placeholder="https://drive.google.com/..." />
+          <p class="field-help">Paste a shareable Drive, Dropbox, or OneDrive link. Make sure link access is enabled before submitting.</p>
+        </div>
 
-    <!-- <div class="form-group">
-        <label>Budget Range</label>
-        <select name="budget">
-          <option value="" disabled selected>Select if known…</option>
-          <option>Under $50</option>
-          <option>$50 – $150</option>
-          <option>$150 – $500</option>
-          <option>$500 – $1,000</option>
-          <option>$1,000+</option>
-          <option>Prefer not to say</option>
-        </select>
-      </div>-->
-
-      <div class="form-group">
-        <label>Additional Notes</label>
-        <textarea name="notes" placeholder="Anything else I should know?" style="min-height:80px;"></textarea>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select name="budget" id="budget">
+              <option value="" disabled selected>Select if known…</option>
+              <option>Under $250</option>
+              <option>$250 – $500</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $2,500</option>
+              <option>$2,500+</option>
+              <option>Not sure — advise me</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Anything else we should know?" style="min-height:80px;"></textarea>
+          </div>
+        </div>
       </div>
 
       <hr class="form-divider" />
 
       <div class="submit-row">
-        <p class="submit-note">🔒 Your information is kept private and never shared.</p>
+        <p class="submit-note">🔒 Submitted securely through FormSubmit and used only to respond to your request.</p>
         <button type="submit" class="btn-submit">Submit RFQ →</button>
       </div>
+
+      <div class="form-status" id="form-status" role="alert"></div>
 
       <div class="success-msg" id="success-msg">
         <span class="checkmark">✅</span>
         <strong>Request received!</strong>
-        <span>Thanks for reaching out. I'll review your project and be in touch within 48 hours.</span>
+        <span>Thanks for reaching out. We will review your project and respond within one business day.</span>
       </div>
     </form>
   </div>
@@ -627,29 +776,49 @@
 </footer>
 
 <script>
-  // File upload label
-  /*document.getElementById('file-input').addEventListener('change', function() {
-    const label = document.getElementById('file-name');
-    if (this.files.length > 0) {
-      const names = Array.from(this.files).map(f => f.name).join(', ');
-      label.textContent = '📎 ' + names;
-      label.style.display = 'block';
-    }
-  }); */
-
   // Form submit
-  function handleSubmit(e) {
+  document.querySelectorAll('.service-link').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('service-select').value = link.dataset.service;
+    });
+  });
+
+  const rfqForm = document.getElementById('rfq-form');
+  rfqForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const form = document.getElementById('rfq-form');
-    const btn = form.querySelector('.btn-submit');
+    const status = document.getElementById('form-status');
+    const success = document.getElementById('success-msg');
+    const btn = this.querySelector('.btn-submit');
+
+    status.className = 'form-status';
+    status.textContent = '';
+    success.style.display = 'none';
     btn.textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(() => {
-      form.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
-      btn.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-    }, 1200);
-  }
+
+    try {
+      const response = await fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      const result = await response.json();
+
+      if (!response.ok || result.success === false) {
+        throw new Error(result.message || 'The request could not be sent.');
+      }
+
+      this.reset();
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (error) {
+      status.textContent = `${error.message} Please try again or email us directly.`;
+      status.className = 'form-status error';
+    } finally {
+      btn.textContent = 'Submit RFQ →';
+      btn.disabled = false;
+    }
+  });
 </script>
 </body>
 </html>
