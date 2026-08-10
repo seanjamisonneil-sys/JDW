@@ -368,7 +368,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="logo">Jamison<span>.</span>Design Works</a>
+  <a href="#" class="logo">Jamison <span></span>Design Works</a>
   <ul>
     <li><a href="#services">Services</a></li>
     <li><a href="#rfq">Get a Quote</a></li>
@@ -378,19 +378,19 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
-    <div class="eyebrow">Contract CAD & 3D Printing</div>
+    <!-- <div class="eyebrow">Contract CAD & 3D Printing</div>-->
     <h1>You dream it,<br><em>we create it.</em></h1>
-    <p class="hero-sub">Custom CAD modeling and professional 3D printing services — from concept to finished part. Fast turnaround, competitive pricing, and direct designer communication.</p>
+    <p class="hero-sub">Custom 3D modeling and professional protoyping services — from concept to finished part. Fast turnaround, competitive pricing, and direct designer communication.</p>
     <div>
       <a href="#rfq" class="btn btn-primary">Request a Quote →</a>
       <a href="#services" class="btn btn-ghost">Our Services</a>
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div class="card-feat">
-      <span class="icon">📐</span>
-      <h3>CAD Design</h3>
+  <!--<div class="hero-visual">
+  <div class="card-feat">
+        <span class="icon">📐</span>
+      x<h3>CAD Design</h3>
       <p>Parametric modeling for mechanical parts, enclosures, and custom assemblies.</p>
     </div>
     <div class="card-feat">
@@ -405,34 +405,34 @@
         <div class="stat"><strong>100%</strong><span>Custom work</span></div>
       </div>
     </div>
-  </div>
+  </div>-->
 </section>
 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-inner">
-    <div class="section-label">What we offer</div>
-    <h2>End-to-end design & fabrication</h2>
+    <!--<div class="section-label">What we offer</div>-->
+    <h2>What we offer</h2>
     <div class="services-grid">
       <div class="service-item">
         <span class="num">01</span>
-        <h3>Custom CAD Modeling</h3>
-        <p>Fully parametric 3D models built to your specifications. Ideal for mechanical parts, product enclosures, brackets, and prototypes.</p>
+        <h3>Custom 3D Modeling</h3>
+        <p>Fully parametric 3D models built to your specifications.</p>
       </div>
       <div class="service-item">
         <span class="num">02</span>
-        <h3>3D Printing — FDM</h3>
+        <h3>3D Printing</h3>
         <p>Fused deposition modeling in PLA, PETG, ABS, and more. Great for functional prototypes, jigs, fixtures, and low-run production.</p>
       </div>
       <div class="service-item">
         <span class="num">03</span>
-        <h3>Custom Molds</h3>
-        <p>Custom silicon molds for resin or clay part creation</p>
+        <h3>Prototype Developement</h3>
+        <p>We can take your idea from thought to a physical product</p>
       </div>
       <div class="service-item">
         <span class="num">04</span>
-        <h3>Design Consultation</h3>
-        <p>Not sure where to start? I can help you go from an idea or sketch to a manufacturable design with practical guidance throughout.</p>
+        <h3>Reverse Engineering</h3>
+        <p>Have a part you need recreated, we can recreate your part as a usable 3D model</p>
       </div>
       <div class="service-item">
         <span class="num">05</span>
@@ -440,9 +440,9 @@
         <p>STL cleanup, slicing optimization, and print-ready file delivery. Bring your existing files and I'll get them production-ready.</p>
       </div>
       <div class="service-item">
-        <span class="num">06</span>
-        <h3>Revisions & Iterations</h3>
-        <p>Design is iterative. I work closely with you through revisions until the part or product meets your exact requirements.</p>
+       <span class="num">06</span>
+        <h3>Fabrication</h3>
+        <p>We work with trusted local manufacturing partners to produce CNC machined, laser-cut, and waterjet-cut components.</p>
       </div>
     </div>
   </div>
@@ -453,9 +453,8 @@
   <div class="rfq">
     <div class="rfq-info">
       <div class="section-label">Request a Quote</div>
-      <h2>Tell me about your project</h2>
-      <p>Fill out the form and I'll get back to you within 48 hours with pricing and timeline. No commitment required.</p>
-
+      <h2>Tell us about your project</h2>
+      <p>Fill out the form and we will get back to you as soon as possible with pricing and timeline.</p>
       <ul class="process-steps">
         <li>
           <div class="step-num">1</div>
@@ -468,14 +467,14 @@
           <div class="step-num">2</div>
           <div class="step-text">
             <strong>Receive a quote</strong>
-            <span>I'll review and send a detailed quote within 48 hours.</span>
+            <span>We will review and send any questions we have followed by a quote.</span>
           </div>
         </li>
         <li>
           <div class="step-num">3</div>
           <div class="step-text">
             <strong>Approve & begin</strong>
-            <span>Once approved, we kick off design or printing right away.</span>
+            <span>Once approved, we will start the project on the agreed upon timeline.</span>
           </div>
         </li>
         <li>
@@ -525,12 +524,11 @@
           <label>Service Needed <span class="req">*</span></label>
           <select name="service" required>
             <option value="" disabled selected>Select a service…</option>
-            <option>CAD Design Only</option>
-            <option>3D Printing Only (FDM)</option>
-            <option>Silicon Mold</option>
+            <option>Custom 3D modeling</option>
+            <option>3D Printing</option>
+            <option>Prototype Developement</option>
             <option>CAD Design + 3D Printing</option>
             <option>File Preparation / Cleanup</option>
-            <option>Design Consultation</option>
             <option>Other / Not Sure</option>
           </select>
         </div>
@@ -572,7 +570,7 @@
         <textarea name="description" placeholder="Describe your project in as much detail as possible — dimensions, functionality, end use, tolerances, etc." required></textarea>
       </div>
 
-     <!-- <div class="form-group">
+     <div class="form-group">
         <label>Reference Files</label>
         <label class="file-upload" for="file-input">
           <span class="upload-icon">📎</span>
@@ -582,9 +580,13 @@
           <input type="file" id="file-input" name="files" multiple
             accept=".stl,.step,.stp,.dxf,.svg,.pdf,.png,.jpg,.jpeg,.zip" />
         </label>
-      </div> -->
+      </div> 
+  <div class="form-group">
+        <label>Budget Range</label>
+        <input type="text" name="Budget" placeholder="$1000-$2000" />
+      </div>
 
-      <div class="form-group">
+    <!-- <div class="form-group">
         <label>Budget Range</label>
         <select name="budget">
           <option value="" disabled selected>Select if known…</option>
@@ -595,7 +597,7 @@
           <option>$1,000+</option>
           <option>Prefer not to say</option>
         </select>
-      </div>
+      </div>-->
 
       <div class="form-group">
         <label>Additional Notes</label>
@@ -620,7 +622,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Jamison<span>.</span>Design Works</div>
+  <div class="footer-logo">Jamison <span></span>Design Works</div>
   <p>© 2025 Jamison Design Works. All rights reserved.</p>
 </footer>
 
